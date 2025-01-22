@@ -15,11 +15,18 @@ This project simulates potential MITM attacks on the communication between Elect
   - `evse.py`: Electric Vehicle Supply Equipment simulation
   - `scms.py`: Smart Charging Management System simulation
   - `attacker.py`: MITM attack simulation
-- `security/`: Security and mitigation implementations
-  - `encryption.py`: Encryption utilities
-  - `authentication.py`: Authentication mechanisms
 - `simulation/`: Simulation scenarios and runners
 - `tests/`: Test cases and validation
+
+## Features
+- Simulated EVCS communication protocols
+- Multiple attack scenario simulations:
+  - Passive sniffing
+  - Data manipulation
+  - Replay attacks
+  - Session hijacking
+- Security mitigation implementations
+- Comprehensive testing suite
 
 ## Setup
 1. Create a virtual environment:
@@ -33,8 +40,13 @@ source venv/bin/activate  # On Unix/macOS
 pip install -r requirements.txt
 ```
 
-## Usage
-[Documentation to be added]
+## Running Simulations
+To run the attack simulations:
+```python
+from evcs.src.simulation.attack_scenarios import run_all_scenarios
+
+results = run_all_scenarios()
+```
 
 ## Security Considerations
 This project is for educational purposes only. The simulated attacks should only be performed in controlled, isolated environments.
