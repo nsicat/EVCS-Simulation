@@ -15,7 +15,7 @@ class EVSE:
     def connect(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((self.host, self.port))
-        print("EVSE connected to CSMS")
+        print("EVSE connected to SCMS")
         
         self.start_transaction()
         self.stop_transaction()
