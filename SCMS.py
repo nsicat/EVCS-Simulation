@@ -3,7 +3,7 @@ import socket
 import json
 import time
 
-class CSMS:
+class SCMS:
     def __init__(self):
         self.host = "127.0.0.1"
         self.port = 12345
@@ -16,7 +16,7 @@ class CSMS:
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((self.host, self.port))
         self.server.listen(1)
-        print("CSMS is waiting for 🔋EVSE🔋 connection...")
+        print("SCMS is waiting for 🔋EVSE🔋 connection...")
         
         self.conn, self.addr = self.server.accept()
         print(f"EVSE connected from {self.addr}")
@@ -120,7 +120,7 @@ class CSMS:
         print("CSMS stopped")
 
 def main():
-    csms = CSMS()
+    csms = SCMS()
     try:
         csms.start()
     except KeyboardInterrupt:
