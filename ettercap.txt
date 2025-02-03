@@ -1,0 +1,73 @@
+
+# How to run Ettercap
+
+## Step 1: Install Homebrew (if not installed)
+
+Homebrew is a package manager for macOS that makes it easier to install Linux-based tools.
+
+## Installation
+
+Open Terminal and run:
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After installation, make sure to add Homebrew to your PATH (if prompted) by running:
+
+```
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+## Step 2: Install Ettercap
+
+Once Homebrew is installed, install Ettercap by running:
+
+```
+brew install ettercap
+```
+
+This will install Ettercap with its necessary dependencies.
+
+## Step 3: Verify Installation
+
+Check if Ettercap is installed correctly:
+
+Bash
+
+```
+ettercap --version
+```
+
+or try launching the graphical version:
+
+Bash
+
+```
+ettercap -G
+```
+
+## Step 4: Grant Permissions (If Needed)
+
+Since Ettercap requires network sniffing privileges, you might need to grant extra permissions:
+
+Run Ettercap with sudo:
+
+Bash
+
+```
+sudo ettercap -G
+```
+
+If you get permission errors, you may need to disable SIP (System Integrity Protection) temporarily (not recommended unless necessary).
+
+## Step 5: Running Ettercap
+
+## Graphical Mode (GUI)
+
+Bash
+
+```
+sudo ettercap -G
+```
