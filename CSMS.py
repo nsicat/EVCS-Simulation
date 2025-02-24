@@ -2,6 +2,7 @@
 import socket
 import json
 import time
+import ssl
 
 class CSMS:
     def __init__(self):
@@ -11,17 +12,44 @@ class CSMS:
         self.conn = None
         self.addr = None
         self.transaction_id = 1  # Simple transaction ID management
+        
+        # SSL context setup for development
+        self.context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        self.context.load_cert_chain(
+            certfile='certs/server.crt',
+            keyfile='certs/server.key'
+        )
+        # For development only
+        self.context.check_hostname = False
+        self.context.verify_mode = ssl.CERT_NONE
+        
+        # In production, use these settings:
+        # self.context.load_verify_locations(cafile='certs/ca.crt')
+        # self.context.verify_mode = ssl.CERT_REQUIRED
 
     def start(self):
+        # Create a TCP socket
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((self.host, self.port))
         self.server.listen(1)
-        print("CSMS is waiting for 🔋EVSE🔋 connection...")
+        print(" CSMS is waiting for secure EVSE connection...")
         
-        self.conn, self.addr = self.server.accept()
-        print(f"EVSE connected from {self.addr}")
+        # Accept connections
+        client_socket, self.addr = self.server.accept()
+        print(f"EVSE attempting connection from {self.addr}")
         
-        self.communicate()
+        try:
+            # Wrap the socket with SSL/TLS
+            self.conn = self.context.wrap_socket(client_socket, server_side=True)
+            print(f" Secure connection established with EVSE at {self.addr}")
+            print(f"Using cipher: {self.conn.cipher()}")
+            self.communicate()
+        except ssl.SSLError as e:
+            print(f" SSL/TLS handshake failed: {e}")
+            client_socket.close()
+        except Exception as e:
+            print(f" Error during connection: {e}")
+            client_socket.close()
 
     def communicate(self):
         while True:

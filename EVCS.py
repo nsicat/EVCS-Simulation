@@ -3,6 +3,7 @@
 import socket
 import json
 import time
+import ssl
 
 class EVSE:
     def __init__(self):
@@ -11,14 +12,40 @@ class EVSE:
         self.client = None
         self.connector_id = 1  # Simple connector ID
         self.id_tag = "EV12345"  # Example ID tag
+        
+        # SSL context setup for development
+        self.context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+        self.context.check_hostname = False  # For development only
+        self.context.verify_mode = ssl.CERT_NONE  # For development only
+        
+        # In production, use these settings instead:
+        # self.context.load_verify_locations(cafile='certs/ca.crt')
+        # self.context.verify_mode = ssl.CERT_REQUIRED
+        # self.context.check_hostname = True
 
     def connect(self):
-        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client.connect((self.host, self.port))
-        print("EVSE connected to CSMS")
-        
-        self.start_transaction()
-        self.stop_transaction()
+        try:
+            # Create a TCP socket
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            
+            # Wrap the socket with SSL/TLS
+            self.client = self.context.wrap_socket(sock, server_hostname=self.host)
+            
+            # Connect to the server
+            self.client.connect((self.host, self.port))
+            print("✅ Secure connection established with CSMS")
+            print(f"Using cipher: {self.client.cipher()}")
+            
+            self.start_transaction()
+            self.stop_transaction()
+            
+        except ssl.SSLError as e:
+            print(f"❌ SSL/TLS handshake failed: {e}")
+        except Exception as e:
+            print(f"❌ Connection error: {e}")
+        finally:
+            if self.client:
+                self.client.close()
 
     def start_transaction(self):
         # Create start transaction message

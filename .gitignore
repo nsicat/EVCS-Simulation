@@ -38,3 +38,8 @@ Thumbs.db
 # Project specific
 *.log
 .env
+
+certs/
+
+
+documentation.md
