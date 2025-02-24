@@ -15,7 +15,7 @@ class EVSE:
     def connect(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((self.host, self.port))
-        print("EVSE connected to CSMS")
+        print("EVSE connected to SCMS")
         
         self.start_transaction()
         self.stop_transaction()
@@ -32,7 +32,7 @@ class EVSE:
         self.client.send(json.dumps(start_transaction).encode('utf-8'))
         
         response = self.client.recv(1024).decode('utf-8')
-        print(f"Response from CSMS: {json.dumps(json.loads(response), indent=2)}")
+        print(f"Response from SCMS: {json.dumps(json.loads(response), indent=2)}")
         
         # Simulate charging time
         print("Charging in progress...")
@@ -49,12 +49,12 @@ class EVSE:
         self.client.send(json.dumps(stop_transaction).encode('utf-8'))
         
         response = self.client.recv(1024).decode('utf-8')
-        print(f"Response from CSMS: {json.dumps(json.loads(response), indent=2)}")
+        print(f"Response from SCMS: {json.dumps(json.loads(response), indent=2)}")
 
     def close(self):
         if self.client:
             self.client.close()
-            print("EVSE disconnected from CSMS")
+            print("EVSE disconnected from SCMS")
 
 def main():
     evse = EVSE()
