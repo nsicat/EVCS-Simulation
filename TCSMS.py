@@ -6,7 +6,7 @@ import ssl
 
 class CSMS:
     def __init__(self):
-        self.host = "127.0.0.1"
+        self.host = "0.0.0.0"
         self.port = 12345
         self.server = None
         self.conn = None
@@ -15,9 +15,9 @@ class CSMS:
         #TLS configuration
         self.context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
         self.context.load_cert_chain(certfile="csms_cert.pem",keyfile="csms_key.pem")
-        self.context.load_verify_locations(cafile="evse_cert.pem") #verify EVSE certificate
+        self.context.load_verify_locations(cafile="evcs_cert.pem") #verify EVSE certificate
         self.context.verify_mode = ssl.CERT_REQUIRED # require client certificate
-        
+
     def start(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((self.host, self.port))

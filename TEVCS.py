@@ -15,7 +15,7 @@ class EVSE:
 
        # TLS configuration
         self.context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-        self.context.load_cert_chain(certfile="evse_cert.pem", keyfile="evse_key.pem")
+        self.context.load_cert_chain(certfile="evcs_cert.pem", keyfile="evcs_key.pem")
         self.context.load_verify_locations(cafile="csms_cert.pem")  # Verify CSMS certificate
         self.context.verify_mode = ssl.CERT_REQUIRED  # Require server certificate
 
