@@ -78,4 +78,4 @@ if __name__ == "__main__":
     main()
 
 #openssl req -x509 -newkey rsa:4096 -keyout evcs_key.pem -out evcs_cert.pem -days 365 -nodes -subj "/CN=EVCS"
-
+#scp evcs_cert.pem user@CSMS_VM:/path/to/evcs_cert.pem
