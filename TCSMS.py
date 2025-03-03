@@ -141,3 +141,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#openssl req -x509 -newkey rsa:4096 -keyout csms_key.pem -out csms_cert.pem -days 365 -nodes -subj "/CN=CSMS"
+#scp csms_cert.pem user@EVSE_VM:/path/to/csms_cert.pem
+
