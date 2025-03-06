@@ -1,4 +1,7 @@
 ### CSMS Server (Central System Management)
+'''
+Follow the encryption.md to setup the encryption chargers
+'''
 import socket
 import json
 import time

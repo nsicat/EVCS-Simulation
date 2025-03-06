@@ -1,4 +1,7 @@
 ### EVSE Client (Electric Vehicle Supply Equipment)
+'''
+Follow the encryption.md to setup the encryption chargers
+'''
 
 import socket
 import json
