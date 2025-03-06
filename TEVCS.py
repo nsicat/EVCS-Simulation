@@ -22,7 +22,7 @@ class EVSE:
     def connect(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # Wrap the socket with TLS
-        self.client = self.context.wrap_socket(self.client, server_hostname="192.168.64.2")
+        self.client = self.context.wrap_socket(self.client, server_hostname="CSMS")
         self.client.connect((self.host, self.port))
         print("EVSE connected to CSMS")
         
