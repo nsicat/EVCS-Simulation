@@ -44,4 +44,4 @@ On the CSMS VM, copy csms_cert.pem to the EVCS VM using SCP:
 scp csms_cert.pem user@evcs-vm:/path/to/store/
 ```
 
-## Make sure that the 
+Make sure that the TEVCS.py on line(25) is set up correctly in the line for server_host = "Certificate Name"  Certificate Name = CSMS. 
