@@ -1,11 +1,29 @@
-### EVSE Client (Electric Vehicle Supply Equipment)
+"""
+EVSE (Electric Vehicle Supply Equipment) Client Implementation
+This module implements a simplified version of an OCPP (Open Charge Point Protocol) client
+that simulates an EV charging station communicating with a central management system.
+
+The client simulates basic charging operations:
+- Connecting to central system
+- Starting charging sessions
+- Simulating charging time
+- Stopping charging sessions
+"""
 
 import socket
 import json
 import time
 
 class EVSE:
+    """
+    Electric Vehicle Supply Equipment client class that simulates a charging station.
+    Implements a TCP client to communicate with the CSMS (Central System Management Server).
+    """
     def __init__(self):
+        """
+        Initialize EVSE client with default connection settings and identification parameters.
+        Sets up connection details and basic charging station parameters.
+        """
         self.host = "127.0.0.1"
         self.port = 12345
         self.client = None
@@ -13,6 +31,10 @@ class EVSE:
         self.id_tag = "EV12345"  # Example ID tag
 
     def connect(self):
+        """
+        Establish connection with the CSMS server and initiate a charging sequence.
+        Performs a complete charging cycle (start -> simulate charging -> stop).
+        """
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((self.host, self.port))
         print("EVSE connected to CSMS")
@@ -21,7 +43,15 @@ class EVSE:
         self.stop_transaction()
 
     def start_transaction(self):
-        # Create start transaction message
+        """
+        Initiate a charging transaction with the CSMS.
+        
+        Sends a StartTransaction request with:
+        - connectorId: Identifier for the charging connector
+        - idTag: Authentication tag for the charging session
+        
+        Simulates a charging session with a 10-second duration.
+        """
         start_transaction = {
             "type": "StartTransaction",
             "connectorId": self.connector_id,
@@ -39,7 +69,14 @@ class EVSE:
         time.sleep(10)  # Simulate charging time
 
     def stop_transaction(self):
-        # Create stop transaction message
+        """
+        End a charging transaction with the CSMS.
+        
+        Sends a StopTransaction request with:
+        - transactionId: Identifier for the charging session to stop
+        
+        Performs a complete charging cycle (start -> simulate charging -> stop).
+        """
         stop_transaction = {
             "type": "StopTransaction",
             "transactionId": 1  # Assuming the transaction ID from start response
@@ -52,11 +89,19 @@ class EVSE:
         print(f"Response from CSMS: {json.dumps(json.loads(response), indent=2)}")
 
     def close(self):
+        """
+        Clean up client resources and close the connection to CSMS.
+        """
+        
         if self.client:
             self.client.close()
             print("EVSE disconnected from CSMS")
 
 def main():
+    """
+    Main entry point for the EVSE client.
+    Handles client startup, charging simulation, and graceful shutdown.
+    """
     evse = EVSE()
     try:
         evse.connect()
