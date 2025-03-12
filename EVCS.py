@@ -36,7 +36,7 @@ class EVSE:
         
         # Simulate charging time
         print("Charging in progress...")
-        time.sleep(10)  # Simulate charging time
+        time.sleep(50)  # Simulate charging time
 
     def stop_transaction(self):
         # Create stop transaction message

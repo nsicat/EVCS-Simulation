@@ -3,6 +3,7 @@ from cryptography.hazmat.primitives.asymmetric import dh
 from cryptography.hazmat.primitives import serialization
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
+import tim
 
 class CSMS:
     def __init__(self):
@@ -32,12 +33,20 @@ class CSMS:
     def encrypt(self, data):
         # Encrypt data using AES
         cipher = AES.new(self.shared_key, AES.MODE_ECB)
-        return cipher.encrypt(pad(data.encode(), AES.block_size))
+        start_time = time.time()
+        encrypted_data = cipher.encrypt(pad(data.encode(), AES.block_size))
+        end_time = time.time()
+        print(f"Encryption time: {end_time - start_time:.6f} seconds")
+        return encrypted_data
 
     def decrypt(self, encrypted_data):
         ## Decrypt data using AES
         cipher = AES.new(self.shared_key, AES.MODE_ECB)
-        return unpad(cipher.decrypt(encrypted_data), AES.block_size).decode()
+        start_time = time.time()
+        decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size).decode()
+        end_time = time.time()
+        print(f"Decryption time: {end_time - start_time:.6f} seconds")
+        return decrypted_data
 
     def start(self):
         # Start the CSMS server
@@ -74,9 +83,12 @@ class CSMS:
 
         # Communicate securely
         while True:
+            start_time = time.time()
             encrypted_data = self.conn.recv(1024)
             if not encrypted_data:
                 break
+            end_time = time.time()
+            print(f"Network latency: {end_time - start_time:.6f} seconds")
 
             # Decrypt the message
             decrypted_data = self.decrypt(encrypted_data)
