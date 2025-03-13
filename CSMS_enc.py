@@ -83,12 +83,12 @@ class CSMS:
 
         # Communicate securely
         while True:
-            start_time = time.time()
+            #start_time = time.time()
             encrypted_data = self.conn.recv(1024)
             if not encrypted_data:
                 break
-            end_time = time.time()
-            print(f"Network latency: {end_time - start_time:.6f} seconds")
+            #end_time = time.time()
+           # print(f"Network latency: {end_time - start_time:.6f} seconds")
 
             # Decrypt the message
             decrypted_data = self.decrypt(encrypted_data)
