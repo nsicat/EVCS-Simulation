@@ -3,7 +3,7 @@ from cryptography.hazmat.primitives.asymmetric import dh
 from cryptography.hazmat.primitives import serialization
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
-import tim
+import time
 
 class CSMS:
     def __init__(self):
