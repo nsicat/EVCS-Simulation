@@ -33,7 +33,7 @@ EVCS-Simulation/
 
 ## Prerequisites
 
-1. Python 3.x
+1. Python 3.10
 2. Three Virtual Machines:
    - VM1: Debian (CSMS)
    - VM2: Debian (EVSE)
