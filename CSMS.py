@@ -36,7 +36,7 @@ class CSMS:
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((self.host, self.port))
         self.server.listen(1)
-        print("CSMS is waiting for 🔋EVSE🔋 connection...")
+        print("CSMS is waiting for EVSE connection...")
         
         self.conn, self.addr = self.server.accept()
         print(f"EVSE connected from {self.addr}")
