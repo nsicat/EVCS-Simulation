@@ -36,7 +36,7 @@ class CSMS:
         #start_time = time.time()
         encrypted_data = cipher.encrypt(pad(data.encode(), AES.block_size))
         #end_time = time.time()
-        print(f"Encryption time: {end_time - start_time:.6f} seconds")
+        #print(f"Encryption time: {end_time - start_time:.6f} seconds")
         return encrypted_data
 
     def decrypt(self, encrypted_data):
@@ -45,7 +45,7 @@ class CSMS:
         #start_time = time.time()
         decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size).decode()
         #end_time = time.time()
-        print(f"Decryption time: {end_time - start_time:.6f} seconds")
+        #print(f"Decryption time: {end_time - start_time:.6f} seconds")
         return decrypted_data
 
     def start(self):
