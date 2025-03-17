@@ -13,22 +13,16 @@ This project simulates the communication between an Electric Vehicle Charging St
 ## Directory Structure
 ```
 EVCS-Simulation/
-├── ARPspoof.py           # ARP spoofing implementation
 ├── CSMS.py              # Charging Station Management System
 ├── CSMS_enc.py          # Encrypted version of CSMS (Diffie-Hellman + AES)
 ├── EVCS.py              # Electric Vehicle Charging Station
 ├── EVSE_enc.py          # Encrypted version of EVCS (Diffie-Hellman + AES)
 ├── TCSMS.py             # Test CSMS implementation (TLS)
 ├── TEVCS.py             # Test EVCS implementation (TLS)
-├── csms_cert.pem        # CSMS certificate
-├── csms_key.pem         # CSMS private key
-├── evcs_cert.pem        # EVCS certificate
-├── evcs_key.pem         # EVCS private key
 ├── requirements.txt     # Python dependencies
 ├── setup.sh            # Setup script
 ├── MITM_attack.md      # MITM attack documentation
 ├── encryption.md       # Encryption documentation
-└── ettercap.txt        # Ettercap configuration notes
 ```
 
 ## Prerequisites
