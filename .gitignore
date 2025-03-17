@@ -38,3 +38,10 @@ Thumbs.db
 # Project specific
 *.log
 .env
+
+ettercap.txt
+csms_cert.pem
+csms_key.pem
+evcs_cert.pem
+evcs_key.pem
+ARPspoof.py
