@@ -143,7 +143,6 @@ python3 TEVCS.py         # TLS version
 
 - See `MITM_attack.md` for detailed MITM attack setup and execution
 - See `encryption.md` for encryption implementation details
-- See `ettercap.txt` for Ettercap-specific configurations
 
 ## Security Notice
 
